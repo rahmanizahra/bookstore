@@ -43,37 +43,27 @@ function NewBook({ books, setBooks, maxBooks,fetchData }) {
   };
 
   const handleBookInfoSubmit = async () => {
-    /////////////////////////////////////////////////////////
-    // HANDLE ADDING NEW BOOK FROM FRONTEND
-    //const newBooks = [...books];
-    //for (let i = 0; i < numBooks; i++) {
-    //  const title = prompt(`Enter title for book ${i + 1}:`);
-    //  const author = prompt(`Enter author for book ${i + 1}:`);
-    //  const price = prompt(`Enter price for book ${i + 1}:`);
-    //  const id = books.length + 1;
-    //  newBooks.push({ title, author, price, id });
-    //}
-    //alert("Books added successfully");
-    //setBooks(newBooks);
-    ////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////
     // HANDLE ADDING NEW BOOK FROM BACKEND
-    const newBook = {};
+    const newBooks = {};
     for (let i = 0; i < numBooks; i++) {
+      const newBook = {};
       const title = prompt(`Enter title for book ${i + 1}:`);
       const author = prompt(`Enter author for book ${i + 1}:`);
       const price = parseInt(prompt(`Enter price for book ${i + 1}:`));
-      const id = books.length + 1;
+      const id = books.length + 1+i;
       newBook.id = id;
       newBook.title = title;
       newBook.author = author;
       newBook.price = price;
+      newBooks.push(newBook);
     }
     try {
       // Send POST request to the backend
       const response = await axios.post(
         "http://localhost:3001/client/addBooks",
         {
-          books: newBook,
+          books: newBooks,
         }
       );
       fetchData();
